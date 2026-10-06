@@ -1,10 +1,27 @@
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+import { getCurrentUser } from "./auth.js";
+
+// let cart = JSON.parse(localStorage.getItem("cart")) || [];
 // localStorage.clear();
-function saveCart() {
-    localStorage.setItem("cart", JSON.stringify(cart));
+function saveCart(cart) {
+    const user = getCurrentUser();
+
+    if (!user) {
+        return;
+    }
+
+    const key = "cart_" + user.id;
+
+    localStorage.setItem(key, JSON.stringify(cart));
 }
 
 export function addToCart(product) {
+    if (!getCurrentUser) {
+        alert("Сначала войдите в аккаунт!");
+        return;
+    }
+
+    const cart = getCart();
+
     const item = cart.find(function (item) {
         return item.id === product.id;
     });
@@ -20,13 +37,15 @@ export function addToCart(product) {
         });
     }
 
-    saveCart();
+    saveCart(cart);
 }
 
 export function getCartCount() {
     // return cart.reduce(function (sum, item) {
     //     return sum + item.quantity;
     // }, 0);
+
+    const cart = getCart();
 
     let count = 0;
 
@@ -38,10 +57,19 @@ export function getCartCount() {
 }
 
 export function getCart() {
-    return cart;
+    const user = getCurrentUser();
+
+    if (!user) {
+        return [];
+    }
+
+    const key = "cart_" + user.id;
+
+    return JSON.parse(localStorage.getItem(key)) || [];
 }
 
 export function increaseQuantity(id) {
+    const cart = getCart();
 
     const item = cart.find(
         item => item.id === id
@@ -51,11 +79,12 @@ export function increaseQuantity(id) {
         item.quantity++;
     }
 
-    saveCart();
+    saveCart(cart);
 }
 
 
 export function decreaseQuantity(id) {
+    const cart = getCart();
 
     const item = cart.find(
         item => item.id === id
@@ -77,23 +106,21 @@ export function decreaseQuantity(id) {
     }
 
 
-    saveCart();
+    saveCart(cart);
 }
 
 
 export function removeFromCart(id) {
+    const cart = getCart();
 
     cart = cart.filter(
         item => item.id !== id
     );
 
-    saveCart();
+    saveCart(cart);
 }
 
 
 export function clearCart() {
-
-    cart = []
-
-    saveCart();
+    saveCart([]);
 }

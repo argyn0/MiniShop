@@ -2,6 +2,7 @@ import { getProducts } from "./api.js";
 import { renderProducts, showProductDetails } from "./products.js";
 import { addToCart, getCartCount } from "./cart.js";
 import { addToFavorites, removeFromFavorites, renderFavorites } from "./favorites.js";
+import { getCurrentUser, logoutUser } from "./auth.js";
 
 
 let products = []
@@ -48,6 +49,12 @@ let closeContact = document.getElementById("closeContact");
 const productModal = document.querySelector("#productModal");
 
 const closeProduct = document.querySelector("#closeProduct");
+
+const userName = document.querySelector("#userName");
+
+const authLink = document.querySelector("#authLink");
+
+const logoutBtn = document.querySelector("#logoutBtn");
 
 
 async function start() {
@@ -185,6 +192,10 @@ sendBtn.addEventListener("click", function() {
 
 
 favoritesBtn.addEventListener("click", function() {
+    if (!getCurrentUser()) {
+        alert("Сначала войдите в аккаунт!");
+        return;
+    }
     favoritesModal.classList.add("active");
     document.body.classList.add("modal-open");
     renderFavorites();
@@ -264,5 +275,27 @@ window.addEventListener("keydown", function(event) {
     }
 });
 
+function renderUser() {
+    const user = getCurrentUser();
 
+    if (user) {
+        userName.textContent = "Привет, " + user.username;
+
+        authLink.classList.add("hidden");
+        logoutBtn.classList.remove("hidden");
+    } else {
+        userName.textContent = "";
+
+        authLink.classList.remove("hidden");
+        logoutBtn.classList.add("hidden");
+    }
+}
+
+logoutBtn.addEventListener("click", function() {
+    logoutUser();
+
+    window.location.reload();
+});
+
+renderUser();
 start();

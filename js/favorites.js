@@ -1,17 +1,38 @@
-let favorites =
-    JSON.parse(localStorage.getItem("favorites")) || [];
+import { getCurrentUser } from "./auth.js";
 
+function getFavorites() {
+    const user = getCurrentUser();
 
-function saveFavorites() {
-    localStorage.setItem(
-        "favorites",
-        JSON.stringify(favorites)
-    );
+    if (!user) {
+        return [];
+    }
+
+    const key = "favorites_" + user.id;
+
+    return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function saveFavorites(favorites) {
+    const user = getCurrentUser();
+
+    if (!user) {
+        return;
+    }
+
+    const key = "favorites_" + user.id;
+
+    localStorage.setItem(key, JSON.stringify(favorites));
 }
 
 
 export function addToFavorites(product) {
+    if (!getCurrentUser()) {
+        alert("Сначала войдите в аккаунт!");
+        return;
+    }
 
+    const favorites = getFavorites();
+    console.log(favorites)
     let favorite = favorites.find(function(item) {
         return item.id === product.id;
     });
@@ -25,7 +46,7 @@ export function addToFavorites(product) {
 
     favorites.push(product);
 
-    saveFavorites();
+    saveFavorites(favorites);
     alert("Товар добавлен в избранное!");
 
     console.log(favorites);
@@ -33,15 +54,18 @@ export function addToFavorites(product) {
 
 
 export function removeFromFavorites(id) {
+    const favorites = getFavorites();
 
-    favorites = favorites.filter(function(item) {
+    let updatedFavorites = favorites.filter(function(item) {
         return item.id !== id;
     });
 
-    saveFavorites();
+    saveFavorites(updatedFavorites);
 }
 
 export function renderFavorites() {
+    const favorites = getFavorites();
+
     const favoritesBlock = document.querySelector("#favorites");
 
     favoritesBlock.innerHTML = "";

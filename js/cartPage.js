@@ -1,4 +1,5 @@
 import { getCart, increaseQuantity, decreaseQuantity, clearCart, removeFromCart } from "./cart.js";
+import { getCurrentUser } from "./auth.js";
 
 const cartItems =
     document.querySelector("#cartItems");
@@ -11,6 +12,22 @@ const clearCartButton =
 
 
 function renderCart() {
+    if (!getCurrentUser()) {
+        cartItems.innerHTML = `
+            <h2>Войдите, чтобы пользоваться корзиной</h2>
+            <a href="./auth.html" class="link">
+                Войти / Регистрация
+            </a>
+        `;
+
+        totalPrice.textContent = "0";
+        clearCartButton.classList.add("hidden");
+
+        return;
+    }
+
+    clearCartButton.classList.remove("hidden");
+
     const cart = getCart();
 
     cartItems.innerHTML = "";

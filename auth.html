@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Вход | MiniShop</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <header>
+        <h1>MiniShop</h1>
+
+        <a href="./index.html" class="link">
+            Вернуться в магазин
+        </a>
+    </header>
+
+    <main>
+        <form id="authForm" class="auth-form">
+            <h2>Вход и регистрация</h2>
+
+            <p>Учебный магазин. Используйте выдуманный пароль.</p>
+
+            <label for="usernameInput">Логин</label>
+            <input
+                id="usernameInput"
+                type="text"
+                placeholder="Минимум 3 символа"
+                minlength="3"
+                required
+            >
+
+            <label for="passwordInput">Пароль</label>
+            <input
+                id="passwordInput"
+                type="password"
+                placeholder="Минимум 6 символов"
+                minlength="6"
+                required
+            >
+
+            <button type="submit" id="loginBtn">
+                Войти
+            </button>
+
+            <button type="submit" id="registerBtn">
+                Зарегистрироваться
+            </button>
+
+            <p id="authMessage"></p>
+        </form>
+    </main>
+
+    <script type="module" src="./js/authPage.js"></script>
+
+</body>
+
+</html>
