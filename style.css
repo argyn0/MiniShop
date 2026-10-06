@@ -1,0 +1,419 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    color: #222;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Шапка */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 20px 7%;
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.link {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #eee;
+    color: #222;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.link:hover {
+    background: #ddd;
+}
+
+#cartButton {
+    background: #4f46e5;
+    color: white;
+}
+
+#cartButton:hover {
+    background: #3730a3;
+}
+
+/* Основная часть */
+
+main {
+    width: 86%;
+    max-width: 1400px;
+    margin: 30px auto;
+}
+
+/* Поиск и фильтры */
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.controls input,
+.controls select {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: white;
+    font-size: 16px;
+}
+
+.controls input {
+    flex: 1;
+}
+
+/* Товары */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.product {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 15px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product:hover {
+    border-color: #4f46e5;
+}
+
+.product img {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    background: #f8f8f8;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.product h3 {
+    margin: 5px 0;
+    min-height: 45px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.product p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.product .product-price {
+    margin-top: auto;
+    padding-top: 10px;
+    color: #222;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.product button {
+    width: 100%;
+}
+
+.add-cart {
+    background: #4f46e5;
+    color: white;
+}
+
+.add-cart:hover {
+    background: #3730a3;
+}
+
+.favorite-btn {
+    background: #ffe4e6;
+    font-size: 18px;
+}
+
+.favorite-btn:hover {
+    background: #fecdd3;
+}
+
+.details-btn {
+    background: #eee;
+    color: #333;
+}
+
+.details-btn:hover {
+    background: #ddd;
+}
+
+#message {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+}
+
+/* Модальные окна */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal-content {
+    width: 600px;
+    max-width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-header button {
+    background: #eee;
+}
+
+.modal-header button:hover {
+    background: #ddd;
+}
+
+/* Форма обратной связи */
+
+#contactModal input,
+#contactModal textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+#contactModal textarea {
+    height: 120px;
+}
+
+#sendBtn {
+    width: 100%;
+    background: #4f46e5;
+    color: white;
+}
+
+#sendBtn:hover {
+    background: #3730a3;
+}
+
+/* Корзина */
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cart-item img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
+
+.cart-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.cart-info h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.cart-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.cart-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cart-actions button {
+    padding: 6px 10px;
+    background: #eee;
+}
+
+.cart-actions .delete,
+.delete,
+#clearCart {
+    background: #e74c3c;
+    color: white;
+}
+
+#clearCart {
+    margin-top: 15px;
+}
+
+/* Избранное */
+
+#favorites {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Быстрый просмотр */
+
+#productDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#productDetails > img {
+    width: 100%;
+    height: 280px;
+    padding: 15px;
+    object-fit: contain;
+    background: #f8f8f8;
+    border-radius: 8px;
+}
+
+#productDetails h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+#productDetails > p {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+#productDetails > .product-price {
+    color: #222;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Отзывы */
+
+.review {
+    padding: 15px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+.review p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Планшеты */
+
+@media (max-width: 1000px) {
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Телефоны */
+
+@media (max-width: 600px) {
+    header {
+        padding: 15px;
+    }
+
+    main {
+        width: 92%;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+
+    .cart-item {
+        flex-wrap: wrap;
+    }
+
+    .cart-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

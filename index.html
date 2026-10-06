@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MiniShop</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>MiniShop</h1>
+        <button id="contactBtn">
+            Связаться с нами
+        </button>
+        <button id="favoritesBtn">
+            ❤️ Избранное
+        </button>
+        <a href="./cart.html" class="link">
+            Корзина (<span id="cartCount">0</span>)
+        </a>
+    </header>
+    <div class="modal" id="contactModal">
+
+        <div class="modal-content">
+
+            <button id="closeContact">
+                ✕
+            </button>
+
+            <h2>Обратная связь</h2>
+
+            <input id="nameInput" type="text" placeholder="Ваше имя">
+
+            <input id="emailInput" type="email" placeholder="Email">
+
+            <textarea id="messageInput" placeholder="Сообщение"></textarea>
+
+            <button id="sendBtn">
+                Отправить
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="modal" id="favoritesModal">
+        <div class="modal-content">
+
+            <button id="closeFavorites">
+                ✕
+            </button>
+
+            <h2>Избранное</h2>
+
+            <section id="favorites" class="products"></section>
+
+        </div>
+    </div>
+
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button id="closeProduct">
+                ✕
+            </button>
+            <div id="productDetails"></div>
+        </div>
+    </div>
+    <main>
+
+        <section class="controls">
+
+            <input type="text" id="searchInput" placeholder="Поиск товара...">
+
+            <select id="categorySelect">
+                <option value="all">Все категории</option>
+            </select>
+
+        </section>
+
+        <p id="message"></p>
+
+        <section id="products" class="products"></section>
+
+    </main>
+
+    <script type="module" src="./js/main.js"></script>
+
+</body>
+
+</html>
